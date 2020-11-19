@@ -1,0 +1,2 @@
+{% from "projects/_helpers.html" import render_project_card_option %}
+{{ render_project_card_option(project, upload_method, title=_('Healthsites'), explanation=_('Import locations using a healthsites API Key'), link=url_for('healthsites_importer.import_healthsites_tasks', short_name=project.short_name), link_action_text=_('Import data'), icon='code')}}

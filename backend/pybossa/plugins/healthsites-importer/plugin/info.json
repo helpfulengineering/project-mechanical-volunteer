@@ -1,0 +1,9 @@
+{
+  "identifier": "pybossa_healthsites",
+  "name": "pybossa-healthsites",
+  "author": "C. J. Russell - Helpful Engineering",
+  "website": "https://helpfulengineering.org",
+  "license": "MIT",
+  "description": "A PYBOSSA plugin for importing HealthSites.io data.",
+  "version": "1.0.0"
+}

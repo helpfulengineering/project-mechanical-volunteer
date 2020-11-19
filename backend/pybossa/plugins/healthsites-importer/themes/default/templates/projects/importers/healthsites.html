@@ -1,0 +1,24 @@
+{% extends "projects/base.html" %}
+{% set active_page = "projects" %}
+{% set active_project  = project.short_name %}
+{% import "projects/_helpers.html" as helper %}
+{% set section = _('Import tasks') %}
+
+{% from "_formhelpers.html" import render_field %}
+
+{% block projectcontent %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <form method="post" action="{{ url_for(target, short_name=project.short_name) }}">
+            <fieldset>
+                {{ form.hidden_tag() }}
+                {{ render_field(form.country, placeholder="The Country to load tasks for") }}
+                <div class="form-actions">
+                    <input id="submit" type="submit" value="{{_('Import')}}" class="btn btn-primary" />
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+{% endblock %}

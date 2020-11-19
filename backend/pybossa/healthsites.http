@@ -1,0 +1,3 @@
+###
+
+GET https://healthsites.io/api/v2/facilities/?api-key={{healthsites-api-key}}&page=1&country=bolivia&flat-properties=true

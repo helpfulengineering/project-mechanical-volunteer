@@ -1,0 +1,54 @@
+###
+# @name newproject
+GET http://localhost:8080/project/new?api_key={{pybossa-api-key}}
+Content-Type: application/json
+
+###
+GET http://localhost:8080/project/sample_healthsites/settings?api_key={{pybossa-api-key}}
+Content-Type: application/json
+
+###
+GET http://localhost:8080/project/sample_healthsites/tasks/import?type=csv&api_key={{pybossa-api-key}}
+Content-Type: application/json
+
+###
+POST http://localhost:8080/project/new?api_key={{pybossa-api-key}}
+Content-Type: multipart/form-data
+X-CSRFToken: {{newproject.response.body.$.form.csrf}}
+
+
+###
+# @name newuser
+GET http://0.0.0.0:8080/account/register
+User-Agent: python-requests/2.24.0
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+Content-Type: application/json
+
+###
+POST http://localhost:8080/account/register
+Content-Type: application/json
+X-CSRFToken: {{newuser.response.body.$.form.csrf}}
+
+{
+  "email_addr": "blah@blah.com",
+  "fullname": "blahblah", 
+  "name": "blahblah", 
+  "password": "blah",
+  "confirm": "blah"
+}
+
+###
+POST http://0.0.0.0:8080/account/register
+User-Agent: python-requests/2.24.0
+Accept-Encoding: gzip, deflate
+Accept: text/plain
+Connection: keep-alive
+Content-Type: application/json
+X-CSRFToken: {{newuser.response.body.$.form.csrf}}
+Content-Length: 107
+
+{"email_addr": "blah@blah.com", "fullname": "blah", "name": "blah3", "password": "blah", "confirm": "blah"}
+
+#email_addr=blah%40blah.com&fullname=blahblah&name=blahblah&password=blah&confirm=blah
