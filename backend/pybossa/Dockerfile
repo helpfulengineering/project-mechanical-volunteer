@@ -29,12 +29,6 @@ ADD settings_local.py /opt/pybossa/
 
 COPY ./plugins/healthsites-importer/plugin /opt/pybossa/pybossa/plugins/healthsites_importer
 COPY ./plugins/healthsites-importer/themes /opt/pybossa/pybossa/themes
-#COPY ./plugins/healthsites-importer/forms/healthsites_import_form.py /opt/pybossa/pybossa/forms
-
-# TODO: we shouldn't need write permissions on the whole folder
-#   Known files written during runtime:
-#     - /opt/pybossa/pybossa/themes/default/static/.webassets-cache
-#     - /opt/pybossa/alembic.ini and /opt/pybossa/settings_local.py (from entrypoint.sh)
 
 # run with unprivileged user
 RUN chown -R pybossa:pybossa /opt/pybossa
