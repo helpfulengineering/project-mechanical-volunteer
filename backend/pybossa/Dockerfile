@@ -27,6 +27,7 @@ RUN set -x && \
 ADD alembic.ini /opt/pybossa/
 ADD settings_local.py /opt/pybossa/
 
+COPY sentinel.py /opt/pybossa/pybossa/sentinel/__init__.py
 COPY ./plugins/healthsites-importer/plugin /opt/pybossa/pybossa/plugins/healthsites_importer
 COPY ./plugins/healthsites-importer/themes /opt/pybossa/pybossa/themes
 

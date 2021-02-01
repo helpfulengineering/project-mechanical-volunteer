@@ -6,11 +6,6 @@ services:
         environment:
                 - ALLOW_EMPTY_PASSWORD=yes
 
-    redis-sentinel:
-        image: 'bitnami/redis-sentinel:5.0'
-        environment:
-                - REDIS_MASTER_HOST=redis-master
-
     postgres:
         image: 'postgres:12.2-alpine'
         environment:
@@ -24,8 +19,6 @@ services:
            - postgres
        environment:
            - POSTGRES_URL=postgresql://pybossa:supersecretpassword@postgres/pybossa
-           - REDIS_MASTER=mymaster
-           - REDIS_SENTINEL=redis-sentinel
        links:
            - postgres:db
        command: sh -c "sleep 5 && python cli.py db_create"
@@ -36,11 +29,8 @@ services:
             - db-init
         environment:
             - POSTGRES_URL=postgresql://pybossa:supersecretpassword@postgres/pybossa
-            - REDIS_MASTER=mymaster
-            - REDIS_SENTINEL=redis-sentinel
         links:
             - redis-master
-            - redis-sentinel
             - postgres
         entrypoint: /entrypoint.sh
         command:  sh -c "python app_context_rqworker.py scheduled_jobs super high medium low email maintenance"
@@ -51,11 +41,8 @@ services:
             - db-init
         environment:
             - POSTGRES_URL=postgresql://pybossa:supersecretpassword@postgres/pybossa
-            - REDIS_MASTER=mymaster
-            - REDIS_SENTINEL=redis-sentinel
         links:
             - redis-master
-            - redis-sentinel
             - postgres
         entrypoint: /entrypoint.sh
         command:  sh -c "rqscheduler --host redis-master"
@@ -69,14 +56,12 @@ services:
             - db-init
         environment:
             - POSTGRES_URL=postgresql://pybossa:supersecretpassword@postgres/pybossa
-            - REDIS_MASTER=mymaster
-            - REDIS_SENTINEL=redis-sentinel
+            - REDIS_HOST=redis-master
             - HTTPS=on
             - wsgi.url_scheme='https'
             - HEALTHSITES_API_KEY
         links:
             - redis-master
-            - redis-sentinel
             - postgres
         ports:
             - "8080:8080"

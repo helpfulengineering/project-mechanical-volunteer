@@ -109,7 +109,9 @@ ENFORCE_PRIVACY = False
 ## Redis Sentinel
 # List of Sentinel servers (IP, port)
 REDIS_CACHE_ENABLED = True
-REDIS_SENTINEL = [('{{REDIS_SENTINEL}}', 26379)]
+REDIS_SENTINEL = []
+REDIS_HOST = 'redis-master'
+#REDIS_SENTINEL = [('{{REDIS_SENTINEL}}', 26379)]
 REDIS_MASTER = '{{REDIS_MASTER}}'
 REDIS_DB = 0
 REDIS_KEYPREFIX = 'pybossa_cache'
