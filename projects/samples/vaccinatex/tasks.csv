@@ -1,0 +1,3 @@
+Location_Name,Latest_Report_Date_Time,Latest_Report_Status,Latest_Report_Note,Address,Phone
+"Test Location",2021-02-01T08:05:00Z,UNABLE_TO_CONTACT,"Some random note for testing","123 Fake St. N, Wichita, KS 67235","+1-316-555-1212"
+"Another Test Location",2021-02-05T08:05:00Z,UNABLE_TO_CONTACT,"A really long note for testing purposes, blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah","456 Fake St. N, Wichita, KS 67235","+1-316-555-1212"

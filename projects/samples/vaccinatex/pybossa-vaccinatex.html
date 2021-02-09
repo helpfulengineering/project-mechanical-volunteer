@@ -281,25 +281,25 @@
         <div>
             <div class="radio">
                 <label>
-                    <input type="radio" name="CALLBACK" id="CALLBACK_ONE_HOUR" value="ONE_HOUR" checked>
+                    <input type="radio" name="CALLBACK" id="CALLBACK_ONE_HOUR" value="ONE_HOUR">
                     1 hour
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" name="CALLBACK" id="CALLBACK_TWO_HOURS" value="TWO_HOURS" checked>
+                    <input type="radio" name="CALLBACK" id="CALLBACK_TWO_HOURS" value="TWO_HOURS">
                     2 hours
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" name="CALLBACK" id="CALLBACK_TOMORROW" value="TOMORROW_MORNING" checked>
+                    <input type="radio" name="CALLBACK" id="CALLBACK_TOMORROW" value="TOMORROW_MORNING">
                     tomorrow morning
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" name="CALLBACK" id="CALLBACK_THREE_DAYS" value="THREE_DAYS" checked>
+                    <input type="radio" name="CALLBACK" id="CALLBACK_THREE_DAYS" value="THREE_DAYS">
                     3 days
                 </label>
             </div>
@@ -309,6 +309,7 @@
             <p class="help-block">Is there anything else the person you spoke to told you that would help someone figure out if this is the right vaccination site for them right now? <strong>Notes are public on the web</strong></p>
             <textarea class="form-control" id="NOTES" rows="3"></textarea>
         </div>
+        <button value="submit" class="btn-submit">Submit</button>
     </div>
 </div>
 </div>
@@ -317,27 +318,6 @@
 <script src="https://cdn.jsdelivr.net/npm/geolib@3.3.1/lib/index.min.js"></script>
 <!-- PyBossa interface -->
 
-<script>
-    (function(pybossa, $, undefined) {
-
-        var def = $.Deferred();
-
-        pybossa.taskLoaded = function (userFunc) {
-        pybossa.taskLoadedFunc = userFunc;
-        };
-
-        pybossa.presentTask = function (userFunc) {
-            pybossa.presentTaskFunc = userFunc;
-        };
-
-        pybossa.run = function(){
-            var task = {id: '12345', Location_Name: "Some Random Pharmacy", Latest_Report_Date_Time: "2021-02-04T08:00", Latest_Report_Status: "UNABLE_TO_CONTACT", Latest_Report_Note: "Phone Number no longer in service", Address: "123 Fake St., Wichita, KS  67203", Phone: "+1-316-555-1212"}
-            pybossa.taskLoadedFunc(task, def)
-                .done(pybossa.presentTaskFunc(task, $.Deferred()));
-        }
-    }(window.pybossa = window.pybossa || {}, $));
-
-</script>
 <script>
 
     var step = 0;
@@ -399,13 +379,13 @@
             updateBar("Loading task data...");
             //console.log(data);
             $("#task-id").text(task.id);
-            $("#location_name").text(task.Location_Name);
-            $("#latest_report_date").text(formatDate(task.Latest_Report_Date_Time));
-            $("#latest_report_status").text(task.Latest_Report_Status);
-            $("#latest_report_notes").text(task.Latest_Report_Note);
-            $("#location_address").text(task.Address);
-            $("#location_phone").text(task.Phone);
-            $("#click_to_dial_phone").attr("href", "tel:" + task.Phone);
+            $("#location_name").text(task.info.Location_Name);
+            $("#latest_report_date").text(formatDate(task.info.Latest_Report_Date_Time));
+            $("#latest_report_status").text(task.info.Latest_Report_Status);
+            $("#latest_report_notes").text(task.info.Latest_Report_Note);
+            $("#location_address").text(task.info.Address);
+            $("#location_phone").text(task.info.Phone);
+            $("#click_to_dial_phone").attr("href", "tel:" + task.info.Phone);
             loadUserProgress();
 
             $(".btn-submit").off('click').on('click', function(evt){
