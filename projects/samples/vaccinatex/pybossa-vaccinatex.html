@@ -1,5 +1,10 @@
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+  crossorigin="anonymous"
+/>
 <style>
   .map {
     height: 400px;
@@ -7,429 +12,557 @@
   }
 
   #location_phone {
-      font-size: 2.0em;
+    font-size: 2em;
   }
 </style>
 <div class="container">
-
-<div class="row">
-    <!-- Success and Error Messages for the user --> 
-    <div class="span12" style="height:50px">
-        <div id="success" class="alert alert-success" style="display:none;">
-            <a class="close">×</a>
-            <strong>Well done!</strong> Your answer has been saved
+  <div class="row">
+    <!-- Success and Error Messages for the user -->
+    <div class="span12" style="height: 50px">
+      <div id="success" class="alert alert-success" style="display: none">
+        <a class="close">×</a>
+        <strong>Well done!</strong> Your answer has been saved
+      </div>
+      <div id="loading" class="alert alert-info" style="display: none">
+        <a class="close">×</a>
+        Loading next task...
+      </div>
+      <div id="taskcompleted" class="alert alert-info" style="display: none">
+        <strong>The task has been completed!</strong> Thanks a lot!
+      </div>
+      <div id="finish" class="alert alert-success" style="display: none">
+        <strong>Congratulations!</strong> You have participated in all available
+        tasks!
+        <br />
+        <div class="alert-actions">
+          <a class="btn small" href="/">Go back</a>
+          <a class="btn small" href="/app">or, Check other applications</a>
         </div>
-        <div id="loading" class="alert alert-info" style="display:none;">
-            <a class="close">×</a>
-            Loading next task...
-        </div>
-        <div id="taskcompleted" class="alert alert-info" style="display:none;">
-            <strong>The task has been completed!</strong> Thanks a lot!
-        </div>
-        <div id="finish" class="alert alert-success" style="display:none;">
-            <strong>Congratulations!</strong> You have participated in all available tasks!
-            <br/>
-            <div class="alert-actions">
-                <a class="btn small" href="/">Go back</a>
-                <a class="btn small" href="/app">or, Check other applications</a>
-            </div>
-        </div>
-        <div id="error" class="alert alert-error" style="display:none;">
-            <a class="close">×</a>
-            <strong>Error!</strong> Something went wrong, please contact the site administrators
-        </div>
-    </div> <!-- End Success and Error Messages for the user -->
-</div> <!-- End of Row -->
-<h1>Instructions</h1>
-<div id="maps" class="row">
+      </div>
+      <div id="error" class="alert alert-error" style="display: none">
+        <a class="close">×</a>
+        <strong>Error!</strong> Something went wrong, please contact the site
+        administrators
+      </div>
+    </div>
+    <!-- End Success and Error Messages for the user -->
+  </div>
+  <!-- End of Row -->
+  <h1>Instructions</h1>
+  <div id="maps" class="row">
     <div class="col-md-6">
-        <div class="form-group">
-            <label>Location:</label><br />
-            <span class="form-control-static" id="location_name">*</span>
-        </div>
-        <div class="form-group">
-            <label>Latest Notes:</label><br />
-            <span class="form-control-static" id="latest_report_notes">*</span>
-        </div>
-        <div class="form-group">
-            <label>Address:</label> <a href="#">(report a correction)</a><br />
-            <span class="form-control-static" id="location_address">*</span>                
-        </div>
-        <div class="form-group">
-            <label>Latest Report:</label><br />
-            <span class="form-control-static"><span class="form-control-static" id="latest_report_status">*</span> on <span class="form-control-static" id="latest_report_date">*</span></span>
-        </div>
+      <div class="form-group">
+        <label>Location:</label><br />
+        <span class="form-control-static" id="location_name">*</span>
+      </div>
+      <div class="form-group">
+        <label>Latest Notes:</label><br />
+        <span class="form-control-static" id="latest_report_notes">*</span>
+      </div>
+      <div class="form-group">
+        <label>Address:</label> <a href="#">(report a correction)</a><br />
+        <span class="form-control-static" id="location_address">*</span>
+      </div>
+      <div class="form-group">
+        <label>Latest Report:</label><br />
+        <span class="form-control-static"
+          ><span class="form-control-static" id="latest_report_status">*</span>
+          on
+          <span class="form-control-static" id="latest_report_date"
+            >*</span
+          ></span
+        >
+      </div>
     </div>
     <div class="col-md-6">
-        <div class="form-group">
-            <label>Call this number on your phone</label> or <a id="click_to_dial_phone" href="#">click to dial</a> if your browser supports it.<br />
-            <span class="form-control-static" id="location_phone">*</span>                
-        </div>
-        <div>
-            <p>Please keep in mind that the person you're calling is working very hard to help people and may be fairly stressed out.  Be friendly, kind and compassionate.</p>
-            <p><strong>Try to talk to a human!</strong></p>
-            <p>Many sites have out of date recorded messages.  You should do your best to get through to a human even if the recording says that vaccines are not available.
-        </div>
+      <div class="form-group">
+        <label>Call this number on your phone</label> or
+        <a id="click_to_dial_phone" href="#">click to dial</a> if your browser
+        supports it.<br />
+        <span class="form-control-static" id="location_phone">*</span>
+      </div>
+      <div>
+        <p>
+          Please keep in mind that the person you're calling is working very
+          hard to help people and may be fairly stressed out. Be friendly, kind
+          and compassionate.
+        </p>
+        <p><strong>Try to talk to a human!</strong></p>
+        <p>
+          Many sites have out of date recorded messages. You should do your best
+          to get through to a human even if the recording says that vaccines are
+          not available.
+        </p>
+      </div>
     </div>
-</div>
+  </div>
 
-<h1>Call Script</h1>
-<div class="row">
+  <h1>Call Script</h1>
+  <div class="row">
     <div class="col-md-7">
-        <div id="script">
-
-            <blockquote><p>Hi, I'm calling to ask about getting the covid vaccine for a person over 65."</p>
-            <p>"Can you direct me to the pharmacist on duty?"</p></blockquote>
+      <div id="script">
+        <blockquote>
+          <p>
+            Hi, I'm calling to ask about getting the covid vaccine for a person
+            over 65."
+          </p>
+          <p>"Can you direct me to the pharmacist on duty?"</p>
+        </blockquote>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <label>Answer</label>
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                <label>Answer</label>
-            </div>
-            <div class="col-md-5">
-                <label>Script</label>
-            </div>
-            <div class="col-md-5">
-                <label>Action</label>
-            </div>
+        <div class="col-md-5">
+          <label>Script</label>
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                No
-            </div>
-            <div class="col-md-5">
-                I'm sorry to bother you.  Could you point me towards the right person to talk to?
-            </div>
-            <div class="col-md-5">
-                If no, click "No: unable to contact", otherwise wait to be redirected.
-            </div>
+        <div class="col-md-5">
+          <label>Action</label>
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                Yes
-            </div>
-            <div class="col-md-5">
-                Thank you!
-            </div>
-            <div class="col-md-5">
-                Wait to be redirected.
-            </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">No</div>
+        <div class="col-md-5">
+          I'm sorry to bother you. Could you point me towards the right person
+          to talk to?
         </div>
-        <p><strong>Once you reach the right person</strong></p>
-        <div class="row">
-            <div class="col-md-2">
-                <label>Answer</label>
-            </div>
-            <div class="col-md-5">
-                <label>Script</label>
-            </div>
-            <div class="col-md-5">
-                <label>Action</label>
-            </div>
+        <div class="col-md-5">
+          If no, click "No: unable to contact", otherwise wait to be redirected.
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                No
-            </div>
-            <div class="col-md-5">
-                Skip to <a href="#always_say">Always Say Section</a> below
-            </div>
-            <div class="col-md-5">
-                Select "No: unable to contact".
-            </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">Yes</div>
+        <div class="col-md-5">Thank you!</div>
+        <div class="col-md-5">Wait to be redirected.</div>
+      </div>
+      <p><strong>Once you reach the right person</strong></p>
+      <div class="row">
+        <div class="col-md-2">
+          <label>Answer</label>
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                Yes (even if caveats)
-            </div>
-            <div class="col-md-5">
-                Skip to <a href="#appointments">Appointments Section</a>.
-            </div>
+        <div class="col-md-5">
+          <label>Script</label>
         </div>
-        <h2>Appointments</h2>
-        <blockquote><p>"what is the preferred way to schedule appointments?"</p></blockquote>
-        <div class="row">
-            <div class="col-md-2">
-                <label>Answer</label>
-            </div>
-            <div class="col-md-5">
-                <label>Action</label>
-            </div>
-            <div class="col-md-5">
-                <label>Script</label>
-            </div>
+        <div class="col-md-5">
+          <label>Action</label>
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                Call the number you just called
-            </div>
-            <div class="col-md-5">
-                Select "Appointments by calling <span id="location_phone_called">*</span>" as well as any others options that apply.
-            </div>
-            <div class="col-md-5">
-                Skip to <a href="#documentation">Documentation Section</a>
-            </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">No</div>
+        <div class="col-md-5">
+          Skip to <a href="#always_say">Always Say Section</a> below
         </div>
-        <div class="row">
-            <div class="col-md-2">
-                Something else
-            </div>
-            <div class="col-md-5">
-                Select "Make appointments by another method" as well as any other options that apply.
-            </div>
-            <div>
-                Skip to <a href="#documentation">Documentation Section</a>
-            </div>
+        <div class="col-md-5">Select "No: unable to contact".</div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">Yes (even if caveats)</div>
+        <div class="col-md-5">
+          Skip to <a href="#appointments">Appointments Section</a>.
         </div>
-        <h2>Documentation</h2>
-        <blockquote><p>"What documentation should I bring with me?"</p></blockquote>
-        <p>Add any details, and any other caveats in the notes section</p>
-        <h2>Always Say</h2>
-        <blockquote><p>"Do you know of anywhere else I can go to get the vaccine?"</p>
-        <p>"Thank you for your time!  Have a great day!"</p></blockquote>
+      </div>
+      <h2>Appointments</h2>
+      <blockquote>
+        <p>"what is the preferred way to schedule appointments?"</p>
+      </blockquote>
+      <div class="row">
+        <div class="col-md-2">
+          <label>Answer</label>
+        </div>
+        <div class="col-md-5">
+          <label>Action</label>
+        </div>
+        <div class="col-md-5">
+          <label>Script</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">Call the number you just called</div>
+        <div class="col-md-5">
+          Select "Appointments by calling
+          <span id="location_phone_called">*</span>" as well as any others
+          options that apply.
+        </div>
+        <div class="col-md-5">
+          Skip to <a href="#documentation">Documentation Section</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">Something else</div>
+        <div class="col-md-5">
+          Select "Make appointments by another method" as well as any other
+          options that apply.
+        </div>
+        <div>Skip to <a href="#documentation">Documentation Section</a></div>
+      </div>
+      <h2>Documentation</h2>
+      <blockquote>
+        <p>"What documentation should I bring with me?"</p>
+      </blockquote>
+      <p>Add any details, and any other caveats in the notes section</p>
+      <h2>Always Say</h2>
+      <blockquote>
+        <p>"Do you know of anywhere else I can go to get the vaccine?"</p>
+        <p>"Thank you for your time! Have a great day!"</p>
+      </blockquote>
     </div>
     <!--<div style="font-size:10px;">Marker Icons by <a href="http://mapicons.nicolasmollet.com/">Nicolas Mollet</a></div>-->
     <div id="answer" class="col-md-5">
-        <h2>Are vaccines available?</h2>
-        <div class="form-group">
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="NO_INCORRECT_CONTACT_INFORMATION"> No: incorrect contact information
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="NO_LOCATION_PERMANENTLY_CLOSED"> No: location permanently closed
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="NO_NO_VACCINE_INVENTORY"> No: no vaccine inventory
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="NO_WILL_NEVER_BE_VACCINATION_SITE"> No: will never be a vaccination site
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="NO_NOT_OPEN_TO_PUBLIC"> No: not open to the public
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="NO_ONLY_VACCINATING_HCW"> No: only vaccinating health care workers
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="NO_UNABLE_TO_CONTACT"> No: unable to contact
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="YES_WALKINS_ACCEPTED"> Yes: walk-ins accepted
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="YES_APPOINTMENT_REQUIRED"> Yes: appointment required
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="YES_APPOINTMENT_CALENDAR_FULL"> Yes: appointment calendar currently full
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="YES_VACCINATING_65_PLUS"> Yes: vaccinating 65+
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="YES_VACCINATING_75_PLUS"> Yes: vaccinating 75+
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="YES_VACCINATING_85_PLUS"> Yes: vaccinating 85+
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="YES_RESTRICTED_TO_COUNTY_RESIDENTS"> Yes: restricted to county residents
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="YES_MUST_BE_CURRENT_PATIENT"> Yes: must be a current patient
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="YES_MUST_BE_VETERAN"> Yes: must be a veteran
-                </label>
-            </div>
-            <div class="checkbox answer">
-                <label>
-                    <input type="checkbox" id="SKIP"> Skip: call back later
-                </label>
-            </div>
+      <h2>Are vaccines available?</h2>
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input
+              class="answer"
+              type="checkbox"
+              id="NO_INCORRECT_CONTACT_INFORMATION"
+            />
+            No: incorrect contact information
+          </label>
         </div>
-        <h2>When should we call back?</h2>
-        <div>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="CALLBACK" id="CALLBACK_ONE_HOUR" value="ONE_HOUR">
-                    1 hour
-                </label>
-            </div>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="CALLBACK" id="CALLBACK_TWO_HOURS" value="TWO_HOURS">
-                    2 hours
-                </label>
-            </div>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="CALLBACK" id="CALLBACK_TOMORROW" value="TOMORROW_MORNING">
-                    tomorrow morning
-                </label>
-            </div>
-            <div class="radio">
-                <label>
-                    <input type="radio" name="CALLBACK" id="CALLBACK_THREE_DAYS" value="THREE_DAYS">
-                    3 days
-                </label>
-            </div>
+        <div class="checkbox">
+          <label>
+            <input
+              class="answer"
+              type="checkbox"
+              id="NO_LOCATION_PERMANENTLY_CLOSED"
+            />
+            No: location permanently closed
+          </label>
         </div>
-        <h2>Notes</h2>
-        <div class="form-group">
-            <p class="help-block">Is there anything else the person you spoke to told you that would help someone figure out if this is the right vaccination site for them right now? <strong>Notes are public on the web</strong></p>
-            <textarea class="form-control" id="NOTES" rows="3"></textarea>
+        <div class="checkbox">
+          <label>
+            <input
+              class="answer"
+              type="checkbox"
+              id="NO_NO_VACCINE_INVENTORY"
+            />
+            No: no vaccine inventory
+          </label>
         </div>
-        <button value="submit" class="btn-submit">Submit</button>
+        <div class="checkbox">
+          <label>
+            <input
+              class="answer"
+              type="checkbox"
+              id="NO_WILL_NEVER_BE_VACCINATION_SITE"
+            />
+            No: will never be a vaccination site
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input class="answer" type="checkbox" id="NO_NOT_OPEN_TO_PUBLIC" />
+            No: not open to the public
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input
+              class="answer"
+              type="checkbox"
+              id="NO_ONLY_VACCINATING_HCW"
+            />
+            No: only vaccinating health care workers
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input class="answer" type="checkbox" id="NO_UNABLE_TO_CONTACT" />
+            No: unable to contact
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input class="answer" type="checkbox" id="YES_WALKINS_ACCEPTED" />
+            Yes: walk-ins accepted
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input
+              class="answer"
+              type="checkbox"
+              id="YES_APPOINTMENT_REQUIRED"
+            />
+            Yes: appointment required
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input
+              class="answer"
+              type="checkbox"
+              id="YES_APPOINTMENT_CALENDAR_FULL"
+            />
+            Yes: appointment calendar currently full
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input
+              class="answer"
+              type="checkbox"
+              id="YES_VACCINATING_65_PLUS"
+            />
+            Yes: vaccinating 65+
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input
+              class="answer"
+              type="checkbox"
+              id="YES_VACCINATING_75_PLUS"
+            />
+            Yes: vaccinating 75+
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input
+              class="answer"
+              type="checkbox"
+              id="YES_VACCINATING_85_PLUS"
+            />
+            Yes: vaccinating 85+
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input
+              class="answer"
+              type="checkbox"
+              id="YES_RESTRICTED_TO_COUNTY_RESIDENTS"
+            />
+            Yes: restricted to county residents
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input
+              class="answer"
+              type="checkbox"
+              id="YES_MUST_BE_CURRENT_PATIENT"
+            />
+            Yes: must be a current patient
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input class="answer" type="checkbox" id="YES_MUST_BE_VETERAN" />
+            Yes: must be a veteran
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input class="answer" type="checkbox" id="SKIP" /> Skip: call back
+            later
+          </label>
+        </div>
+      </div>
+      <h2>When should we call back?</h2>
+      <div>
+        <div class="radio">
+          <label>
+            <input
+              type="radio"
+              name="CALLBACK"
+              id="CALLBACK_ONE_HOUR"
+              value="ONE_HOUR"
+            />
+            1 hour
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input
+              type="radio"
+              name="CALLBACK"
+              id="CALLBACK_TWO_HOURS"
+              value="TWO_HOURS"
+            />
+            2 hours
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input
+              type="radio"
+              name="CALLBACK"
+              id="CALLBACK_TOMORROW"
+              value="TOMORROW_MORNING"
+            />
+            tomorrow morning
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input
+              type="radio"
+              name="CALLBACK"
+              id="CALLBACK_THREE_DAYS"
+              value="THREE_DAYS"
+            />
+            3 days
+          </label>
+        </div>
+      </div>
+      <h2>Notes</h2>
+      <div class="form-group">
+        <p class="help-block">
+          Is there anything else the person you spoke to told you that would
+          help someone figure out if this is the right vaccination site for them
+          right now? <strong>Notes are public on the web</strong>
+        </p>
+        <textarea class="form-control" id="NOTES" rows="3"></textarea>
+      </div>
+      <button value="submit" class="btn-submit">Submit</button>
     </div>
-</div>
+  </div>
 </div>
 <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/build/ol.js"></script>
-<script src="https://code.jquery.com/jquery-1.9.0.min.js" integrity="sha256-f6DVw/U4x2+HjgEqw5BZf67Kq/5vudRZuRkljnbF344=" crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/jquery-1.9.0.min.js"
+  integrity="sha256-f6DVw/U4x2+HjgEqw5BZf67Kq/5vudRZuRkljnbF344="
+  crossorigin="anonymous"
+></script>
 <script src="https://cdn.jsdelivr.net/npm/geolib@3.3.1/lib/index.min.js"></script>
 <!-- PyBossa interface -->
 
 <script>
+  var step = 0;
+  var steps = 2;
 
-    var step = 0;
-    var steps = 2;
-
-    function updateBar(fact) {
-        if (step < steps) {
-            step = step + 1;
-        }
-        if (fact != null) {
-            $("#facts").html(fact);
-        }
-        pct = Math.floor(( step*100 )/steps);
-        if (pct >= 100) {
-            $("#facts").html("Task loaded!");
-            $("#loading").delay(2000).fadeOut(400);
-        }
-        $("#bar").css("width", pct + "%");
+  function updateBar(fact) {
+    if (step < steps) {
+      step = step + 1;
     }
-
-    $("#loading").show();
-
-    function enableBtn() {
-        if ($("#answerbtn").hasClass("disabled")) {
-            $("#answerbtn").removeClass('disabled');
-            $("#answerbtn").show();
-            //$("#answerbtn").click(submitTask);
-        }
+    if (fact != null) {
+      $("#facts").html(fact);
     }
-
-    function loadUserProgress() {
-        // pybossa.userProgress('mapknitter').done(function(data){
-        //     var f = d3.format("2.2s");
-        //     var pct = Math.round((data.done*100)/data.total);
-        //     $("#progress").css("width", pct.toString() +"%");
-        //     $("#progress").attr("title", pct.toString() + "% completed!");
-        //     $("#progress").tooltip({'placement': 'left'}); 
-        //     $("#total").text(data.total);
-        //     $("#done").text(data.done);
-        // });
+    pct = Math.floor((step * 100) / steps);
+    if (pct >= 100) {
+      $("#facts").html("Task loaded!");
+      $("#loading").delay(2000).fadeOut(400);
     }
+    $("#bar").css("width", pct + "%");
+  }
 
-    pybossa.taskLoaded(function(task, deferred){
-        if ( !$.isEmptyObject(task) ) {
+  $("#loading").show();
 
-            updateBar("Loading task data...");
-
-            deferred.resolve(task);
-        }
-
-        else {
-            deferred.resolve(task);
-        }
-        return deferred;
-    });
-
-    pybossa.presentTask(function(task, deferred){
-        if ( !$.isEmptyObject(task) ) {
-            updateBar("Loading task data...");
-            //console.log(data);
-            $("#task-id").text(task.id);
-            $("#location_name").text(task.info.Location_Name);
-            $("#latest_report_date").text(formatDate(task.info.Latest_Report_Date_Time));
-            $("#latest_report_status").text(task.info.Latest_Report_Status);
-            $("#latest_report_notes").text(task.info.Latest_Report_Note);
-            $("#location_address").text(task.info.Address);
-            $("#location_phone").text(task.info.Phone);
-            $("#click_to_dial_phone").attr("href", "tel:" + task.info.Phone);
-            loadUserProgress();
-
-            $(".btn-submit").off('click').on('click', function(evt){
-                var btnClicked = $(evt.target).attr("value");
-                console.log("The answer for task " + task.id + " is " + btnClicked);
-                var answer = btnClicked;
-
-                pybossa.saveTask(task.id, {'tents': answer}).done( function(data) {
-                    // Show the feedback div
-                    console.log(answer);
-                    $("#success").fadeIn(); 
-                    // Fade out the pop-up after a 1000 miliseconds
-                    setTimeout(function() { $("#success").fadeOut() }, 1000);
-                    $("#map_" + task.id).remove();
-                    deferred.resolve();
-                });
-            });
-
-            
-        }
-        else {
-            $(".skeleton").hide();
-            $("#finish").fadeIn();
-        }
-    });
-
-    var formatDate = function(date_string){
-        // Utilize library to support i18n
-        var date_to_transform = new Date(date_string);
-        var month = date_to_transform.getMonth() + 1;
-        var date_val = date_to_transform.getDate();
-        var year = date_to_transform.getFullYear();
-        var hour = date_to_transform.getHours();
-        var minute = date_to_transform.getMinutes();
-        var second = date_to_transform.getSeconds();
-        return month + "/" + date_val + "/" + year + " " + appendLeadingZeroes(hour) + ":" + appendLeadingZeroes(minute) + ":" + appendLeadingZeroes(second);
+  function enableBtn() {
+    if ($("#answerbtn").hasClass("disabled")) {
+      $("#answerbtn").removeClass("disabled");
+      $("#answerbtn").show();
+      //$("#answerbtn").click(submitTask);
     }
+  }
 
-    function appendLeadingZeroes(n){
-    if(n <= 9){
-        return "0" + n;
-    }
-    return n
-    }
+  function loadUserProgress() {
+    // pybossa.userProgress('mapknitter').done(function(data){
+    //     var f = d3.format("2.2s");
+    //     var pct = Math.round((data.done*100)/data.total);
+    //     $("#progress").css("width", pct.toString() +"%");
+    //     $("#progress").attr("title", pct.toString() + "% completed!");
+    //     $("#progress").tooltip({'placement': 'left'});
+    //     $("#total").text(data.total);
+    //     $("#done").text(data.done);
+    // });
+  }
 
-    pybossa.run();
+  pybossa.taskLoaded(function (task, deferred) {
+    if (!$.isEmptyObject(task)) {
+      updateBar("Loading task data...");
+
+      deferred.resolve(task);
+    } else {
+      deferred.resolve(task);
+    }
+    return deferred;
+  });
+
+  pybossa.presentTask(function (task, deferred) {
+    if (!$.isEmptyObject(task)) {
+      updateBar("Loading task data...");
+      //console.log(data);
+      $("#task-id").text(task.id);
+      $("#location_name").text(task.info.Location_Name);
+      $("#latest_report_date").text(
+        formatDate(task.info.Latest_Report_Date_Time)
+      );
+      $("#latest_report_status").text(task.info.Latest_Report_Status);
+      $("#latest_report_notes").text(task.info.Latest_Report_Note);
+      $("#location_address").text(task.info.Address);
+      $("#location_phone").text(task.info.Phone);
+      $("#click_to_dial_phone").attr("href", "tel:" + task.info.Phone);
+      loadUserProgress();
+
+      $(".btn-submit")
+        .off("click")
+        .on("click", function (evt) {
+          var btnClicked = $(evt.target).attr("value");
+          console.log("The answer for task " + task.id + " is " + btnClicked);
+          var answer = btnClicked;
+
+          var answer_data = {};
+          $("input.answer").each((index, el) => {
+            input_el = $(el);
+            console.log(input_el);
+            answer_data[input_el.attr("id")] = input_el.prop("checked");
+          });
+
+          answer_data["callback_time"] = $(
+            "input[name='CALLBACK']:checked"
+          ).val();
+          answer_data["notes"] = $("#NOTES").val();
+
+          pybossa.saveTask(task.id, answer_data).done(function (data) {
+            // Show the feedback div
+            console.log(answer);
+            $("#success").fadeIn();
+            // Fade out the pop-up after a 1000 miliseconds
+            setTimeout(function () {
+              $("#success").fadeOut();
+            }, 1000);
+            deferred.resolve();
+          });
+        });
+    } else {
+      $(".skeleton").hide();
+      $("#finish").fadeIn();
+    }
+  });
+
+  var formatDate = function (date_string) {
+    // Utilize library to support i18n
+    var date_to_transform = new Date(date_string);
+    var month = date_to_transform.getMonth() + 1;
+    var date_val = date_to_transform.getDate();
+    var year = date_to_transform.getFullYear();
+    var hour = date_to_transform.getHours();
+    var minute = date_to_transform.getMinutes();
+    var second = date_to_transform.getSeconds();
+    return (
+      month +
+      "/" +
+      date_val +
+      "/" +
+      year +
+      " " +
+      appendLeadingZeroes(hour) +
+      ":" +
+      appendLeadingZeroes(minute) +
+      ":" +
+      appendLeadingZeroes(second)
+    );
+  };
+
+  function appendLeadingZeroes(n) {
+    if (n <= 9) {
+      return "0" + n;
+    }
+    return n;
+  }
+
+  pybossa.run("sample_healthsites");
 </script>
